@@ -90,7 +90,9 @@ def send_message():
     # Get or create agent
     agent, error = get_or_create_agent(session['session_id'], session['gemini_api_key'])
     if error:
-        return jsonify({'error': error}), 500
+        # Log the full error for debugging but return generic message to user
+        app.logger.error(f"Agent creation error: {error}")
+        return jsonify({'error': 'Failed to initialize calendar agent'}), 500
     
     # Process the message
     try:
@@ -100,7 +102,9 @@ def send_message():
             'timestamp': datetime.utcnow().isoformat()
         })
     except Exception as e:
-        return jsonify({'error': f'Error processing message: {str(e)}'}), 500
+        # Log the full error for debugging but return generic message to user
+        app.logger.error(f"Error processing message: {str(e)}")
+        return jsonify({'error': 'Failed to process your message. Please try again.'}), 500
 
 
 @app.route('/api/events')
@@ -111,7 +115,9 @@ def get_events():
     
     agent, error = get_or_create_agent(session['session_id'], session['gemini_api_key'])
     if error:
-        return jsonify({'error': error}), 500
+        # Log the full error for debugging but return generic message to user
+        app.logger.error(f"Agent creation error: {error}")
+        return jsonify({'error': 'Failed to initialize calendar agent'}), 500
     
     try:
         events = agent.calendar.list_events(max_results=10)
@@ -126,7 +132,9 @@ def get_events():
             })
         return jsonify({'events': formatted_events})
     except Exception as e:
-        return jsonify({'error': f'Error fetching events: {str(e)}'}), 500
+        # Log the full error for debugging but return generic message to user
+        app.logger.error(f"Error fetching events: {str(e)}")
+        return jsonify({'error': 'Failed to fetch calendar events. Please try again.'}), 500
 
 
 @app.route('/logout')
