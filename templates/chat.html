@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Chat - Google Calendar Chat Agent{% endblock %}
+
+{% block content %}
+<div class="chat-container">
+    <div class="chat-sidebar">
+        <div class="sidebar-header">
+            <h3>📅 Upcoming Events</h3>
+            <button onclick="refreshEvents()" class="btn btn-small">Refresh</button>
+        </div>
+        <div id="events-list" class="events-list">
+            <div class="loading">Loading events...</div>
+        </div>
+    </div>
+
+    <div class="chat-main">
+        <div class="chat-header">
+            <h2>💬 Chat with Your Calendar</h2>
+            <p class="chat-subtitle">Ask me anything about your calendar or tell me to create events</p>
+        </div>
+
+        <div id="chat-messages" class="chat-messages">
+            <div class="message bot-message">
+                <div class="message-content">
+                    <strong>Assistant:</strong> Hello! I'm your calendar assistant. You can ask me to:
+                    <ul>
+                        <li>Show your upcoming events</li>
+                        <li>Create new events</li>
+                        <li>Check your schedule</li>
+                        <li>And more!</li>
+                    </ul>
+                    Try asking: "Show my upcoming events"
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-input-container">
+            <form id="chat-form" class="chat-form">
+                <input 
+                    type="text" 
+                    id="message-input" 
+                    class="chat-input"
+                    placeholder="Type your message here..."
+                    autocomplete="off"
+                    required
+                >
+                <button type="submit" class="btn btn-primary" id="send-btn">Send</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+{% endblock %}

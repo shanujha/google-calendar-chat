@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="hero-section">
+        <h1 class="hero-title">🤖 AI-Powered Calendar Assistant</h1>
+        <p class="hero-subtitle">Manage your Google Calendar through natural language conversations</p>
+        
+        <div class="features">
+            <div class="feature-card">
+                <span class="feature-icon">💬</span>
+                <h3>Natural Language</h3>
+                <p>Chat with your calendar using everyday language</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🔐</span>
+                <h3>Secure & Private</h3>
+                <p>Your data stays with you - use your own API keys</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">⚡</span>
+                <h3>Powered by Gemini</h3>
+                <p>Advanced AI understanding with Google Gemini</p>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            {% if has_api_key %}
+                <a href="{{ url_for('chat') }}" class="btn btn-primary btn-large">Start Chatting</a>
+            {% else %}
+                <a href="{{ url_for('setup') }}" class="btn btn-primary btn-large">Get Started</a>
+            {% endif %}
+        </div>
+
+        <div class="info-section">
+            <h2>What You Can Do</h2>
+            <ul class="feature-list">
+                <li>✅ List your upcoming events</li>
+                <li>✅ Create new calendar events</li>
+                <li>✅ Ask about your schedule</li>
+                <li>✅ Get AI-powered calendar insights</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
