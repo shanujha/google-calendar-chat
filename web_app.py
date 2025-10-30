@@ -19,7 +19,9 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_SECRET_KEY', secrets.token_hex(16))
 
-# Store chat agents per session (in production, use Redis or similar)
+# Store chat agents per session
+# NOTE: In production, use Redis or a database for session storage
+# This in-memory storage is only suitable for development/demo purposes
 chat_agents = {}
 
 
@@ -146,4 +148,9 @@ if __name__ == '__main__':
     print("Open your browser and navigate to: http://localhost:5000")
     print("\nPress Ctrl+C to stop the server\n")
     
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    # Get debug mode from environment variable (default to False for security)
+    debug_mode = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
+    
+    # For production, use a proper WSGI server like gunicorn
+    # Example: gunicorn -w 4 -b 0.0.0.0:5000 web_app:app
+    app.run(debug=debug_mode, host='127.0.0.1', port=5000)

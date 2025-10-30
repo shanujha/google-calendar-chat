@@ -41,12 +41,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Add bot response
                 addMessage(data.response, 'bot');
                 
-                // Refresh events list if the message was about events
-                if (message.toLowerCase().includes('event') || 
-                    message.toLowerCase().includes('calendar') ||
-                    message.toLowerCase().includes('schedule')) {
-                    setTimeout(loadEvents, 1000);
-                }
+                // Refresh events list (server-side can include metadata in future)
+                setTimeout(loadEvents, 1000);
             } else {
                 addMessage(`Error: ${data.error || 'Something went wrong'}`, 'bot');
             }
