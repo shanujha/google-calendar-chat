@@ -1,14 +1,16 @@
 # Google Calendar Chat Agent 🗓️🤖
 
-An AI-based chat agent that interfaces with Google Calendar using Google's Gemini API. Manage your calendar through natural language conversations!
+An AI-based chat agent that interfaces with Google Calendar using Google's Gemini API. Manage your calendar through natural language conversations with both **Web UI** and **CLI** interfaces!
 
 ## Features
 
+- 🌐 **Web Interface**: Modern, responsive web UI for easy interaction
 - 🤖 **Natural Language Interface**: Chat with your calendar using everyday language
 - 🔐 **Secure Authentication**: OAuth2 authentication for Google Calendar
 - 🔑 **Personal Gemini API**: Use your own Gemini API key for AI-powered interactions
 - 📅 **Calendar Management**: List, create, update, and delete events
 - 💬 **Conversational AI**: Powered by Google's Gemini AI model
+- 📱 **Responsive Design**: Works on desktop and mobile devices
 
 ## Prerequisites
 
@@ -73,7 +75,33 @@ GEMINI_API_KEY=your-api-key-here
 
 ## Usage
 
-Run the chat agent:
+You can run the application in two ways:
+
+### Option 1: Web Interface (Recommended)
+
+Start the web server:
+
+```bash
+python web_app.py
+```
+
+Then open your browser and navigate to `http://localhost:5000`
+
+**Features of the Web UI:**
+- 🎨 Beautiful, modern interface
+- 💬 Real-time chat with your calendar
+- 📋 Live event list in the sidebar
+- 📱 Mobile-friendly responsive design
+- 🔒 Secure session-based API key storage
+
+On first visit, you'll be guided through:
+1. Entering your Gemini API key
+2. Authenticating with Google Calendar (browser OAuth flow)
+3. Starting your chat session
+
+### Option 2: Command Line Interface
+
+Run the CLI chat agent:
 
 ```bash
 python calendar_chat.py
@@ -83,7 +111,7 @@ On first run, you'll be prompted to authenticate with Google Calendar through yo
 
 ### Example Commands
 
-Once the chat agent is running, try these commands:
+Once the chat agent is running (web or CLI), try these commands:
 
 - **List Events**: 
   - "Show my upcoming events"
@@ -99,7 +127,7 @@ Once the chat agent is running, try these commands:
   - "Create an event"
   - "Schedule a meeting"
 
-### Chat Interface
+### CLI Chat Interface
 
 ```
 ============================================================
@@ -123,16 +151,37 @@ You: show my events
 
 ## Architecture
 
-The application consists of three main components:
+The application consists of multiple components:
+
+### Backend Components
 
 1. **CalendarService**: Handles Google Calendar API operations (list, create, update, delete events)
 2. **GeminiAgent**: Manages AI interactions using Google's Gemini API for natural language understanding
 3. **CalendarChatAgent**: Coordinates between the calendar service and AI agent to process user queries
 
+### Web UI Components
+
+4. **Flask Web Server** (`web_app.py`): Provides RESTful API and serves the web interface
+5. **HTML Templates**: Modern, responsive UI with chat interface and event sidebar
+6. **JavaScript**: Real-time chat functionality and event updates
+
 ## Files
 
-- `calendar_chat.py`: Main application file
+### Core Application
+- `calendar_chat.py`: CLI chat agent
+- `web_app.py`: Web server and API endpoints
 - `requirements.txt`: Python dependencies
+
+### Web UI
+- `templates/`: HTML templates for web interface
+  - `base.html`: Base template with navigation
+  - `index.html`: Landing page
+  - `setup.html`: API key setup page
+  - `chat.html`: Chat interface
+- `static/css/style.css`: Responsive CSS styling
+- `static/js/chat.js`: Client-side chat functionality
+
+### Configuration
 - `credentials.json`: Google OAuth credentials (you need to create this)
 - `token.json`: Stored OAuth tokens (automatically created after first login)
 - `.env`: Environment variables (optional, for storing API keys)

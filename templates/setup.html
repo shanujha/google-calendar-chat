@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Setup - Google Calendar Chat Agent{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="setup-container">
+        <div class="setup-card">
+            <h1>🔑 Setup Your Calendar Agent</h1>
+            <p class="setup-description">To get started, you'll need a Gemini API key from Google AI Studio.</p>
+
+            {% if error %}
+            <div class="alert alert-error">
+                <span class="alert-icon">⚠️</span>
+                <span>{{ error }}</span>
+            </div>
+            {% endif %}
+
+            <form method="POST" action="{{ url_for('setup') }}" class="setup-form">
+                <div class="form-group">
+                    <label for="gemini_api_key">Gemini API Key</label>
+                    <input 
+                        type="password" 
+                        id="gemini_api_key" 
+                        name="gemini_api_key" 
+                        class="form-control"
+                        placeholder="Enter your Gemini API key"
+                        required
+                    >
+                    <small class="form-help">
+                        Your API key is stored only in your browser session and never saved permanently.
+                    </small>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Continue to Chat</button>
+            </form>
+
+            <div class="setup-instructions">
+                <h3>📋 How to Get Your API Key</h3>
+                <ol>
+                    <li>Visit <a href="https://makersuite.google.com/app/apikey" target="_blank" rel="noopener">Google AI Studio</a></li>
+                    <li>Sign in with your Google account</li>
+                    <li>Click "Create API Key"</li>
+                    <li>Copy the key and paste it above</li>
+                </ol>
+
+                <h3>📅 Google Calendar Setup</h3>
+                <p>You'll also need to set up Google Calendar credentials. See our <a href="https://github.com/shanujha/google-calendar-chat/blob/main/SETUP_CREDENTIALS.md" target="_blank">setup guide</a> for detailed instructions.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
